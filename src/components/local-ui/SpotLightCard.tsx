@@ -97,7 +97,7 @@ export function SpotLightCard() {
   ];
 
   return (
-    <div className="mt-16">
+    <div className="mt-44">
       <TypewriterEffectSmooth
         words={words}
         className="flex justify-center"
