@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom"
 function Landing_Layout() {
     return (
         <>
-            <div className="">
+            <div className="bg-black">
                 <Header />
                 <Outlet />
             </div>
