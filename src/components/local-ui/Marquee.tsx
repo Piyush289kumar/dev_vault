@@ -96,7 +96,7 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative h-auto w-50 cursor-pointer overflow-hidden rounded-2xl border p-4 ",
+        "relative h-auto w-50 cursor-pointer overflow-hidden rounded-2xl border p-8 ",
         // light styles
         "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // dark styles
@@ -112,7 +112,9 @@ const ReviewCard = ({
           <p className="text-xs font-medium dark:text-white/40">{username}</p>
         </div>
       </div>
-      <blockquote className="mt-2 text-sm">{body}</blockquote>
+      <blockquote className="mt-2 text-sm text-zinc-400 font-semibold">
+        {body}
+      </blockquote>
     </figure>
   );
 };
@@ -130,17 +132,17 @@ export default function MarqueeVertical() {
         them have to say.
       </p>
       <div className="relative flex h-[700px] w-[80%] mx-auto flex-row items-center justify-center overflow-hidden rounded-lg bg-black md:shadow-xl gap-x-3 mt-5">
-        <Marquee pauseOnHover vertical className="[--duration:15s]">
+        <Marquee pauseOnHover vertical className="[--duration:26s]">
           {firstRow.map((review) => (
             <ReviewCard key={review.username} {...review} />
           ))}
         </Marquee>
-        <Marquee pauseOnHover vertical className="[--duration:25s]">
+        <Marquee pauseOnHover vertical className="[--duration:38s]">
           {firstRow.map((review) => (
             <ReviewCard key={review.username} {...review} />
           ))}
         </Marquee>
-        <Marquee pauseOnHover vertical className="[--duration:20s]">
+        <Marquee pauseOnHover vertical className="[--duration:26s]">
           {firstRow.map((review) => (
             <ReviewCard key={review.username} {...review} />
           ))}
