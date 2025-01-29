@@ -1,6 +1,6 @@
 import { AuroraText } from "./aurora-text";
 import { SparklesText } from "./sparkles-text";
-import { TextAnimate } from "./text-animate";
+// import { TextAnimate } from "./text-animate";
 import { MoveRight } from "lucide-react";
 
 export function GridBackground() {
@@ -15,7 +15,7 @@ export function GridBackground() {
           <SparklesText text="Products" />
         </h1>
 
-        <TextAnimate
+        {/* <TextAnimate
           animation="blurInUp"
           by="character"
           className="text-center px-12"
@@ -23,7 +23,12 @@ export function GridBackground() {
           Learn Git with me is a free and open-source platform to learn Git and
           GitHub. It is designed to be simple and easy to understand for
           beginners.
-        </TextAnimate>
+        </TextAnimate> */}
+        <p className="text-center px-12">
+          Learn Git with me is a free and open-source platform to learn Git and
+          GitHub. It is designed to be simple and easy to understand for
+          beginners.
+        </p>
 
         <div className="text-center">
           <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6  text-white inline-block">
