@@ -1,4 +1,3 @@
-import Footer from "@/components/landing_components/Footer";
 import { HoverBorderGradientDemo } from "@/components/landing_components/HoverBorderGradient";
 import KeyFeature from "@/components/landing_components/KeyFeature";
 import { GlobeModel } from "@/components/local-ui/Globe";
@@ -15,7 +14,6 @@ export default function HomePage() {
       <SpotLightCard />
       <MarqueeVertical />
       <GlobeModel />
-      <Footer />
     </div>
   );
 }

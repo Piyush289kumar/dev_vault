@@ -106,22 +106,20 @@ export function SpotLightCard() {
       <div className="flex flex-wrap justify-center gap-3 mx-auto mt-5">
         {contentForCard.map((cardBody) => {
           return (
-            <CardSpotlight className="h-96 w-96">
+            <CardSpotlight className="h-96 w-1/4">
               <p className="text-xl font-bold relative z-20 mt-2 text-white">
                 {cardBody.title}
               </p>
               <div className="text-neutral-200 mt-4 relative z-20">
-                Follow these steps to secure your account:
+                {cardBody.subTitle}
                 <ul className="list-none  mt-2">
-                  <Step title="Enter your email address" />
-                  <Step title="Create a strong password" />
-                  <Step title="Set up two-factor authentication" />
-                  <Step title="Verify your identity" />
+                  {cardBody.steps.map((step) => (
+                    <Step title={step} />
+                  ))}
                 </ul>
               </div>
               <p className="text-neutral-300 mt-4 relative z-20 text-sm">
-                Ensuring your account is properly secured helps protect your
-                personal information and data.
+                {cardBody.footerBody}
               </p>
             </CardSpotlight>
           );
