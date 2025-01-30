@@ -5,7 +5,7 @@ import MarqueeVertical from "@/components/local-ui/Marquee";
 import { SpotLightCard } from "@/components/local-ui/SpotLightCard";
 import { GridBackground } from "@/components/ui/GridBackground";
 
-export default function HomePage() {
+const HomePage = () => {
   return (
     <div>
       <GridBackground />
@@ -16,4 +16,6 @@ export default function HomePage() {
       <GlobeModel />
     </div>
   );
-}
+};
+
+export default HomePage;

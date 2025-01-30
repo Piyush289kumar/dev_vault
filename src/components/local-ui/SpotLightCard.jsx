@@ -129,7 +129,7 @@ export function SpotLightCard() {
   );
 }
 
-const Step = ({ title }: { title: string }) => {
+const Step = ({ title }) => {
   return (
     <li className="flex gap-2 items-start">
       <CheckIcon />

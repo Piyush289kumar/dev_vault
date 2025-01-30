@@ -1,6 +1,6 @@
 import ContactForm from "@/pages/landing/contactPage/ContactForm";
 import { motion } from "framer-motion";
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 
 // Dynamically import the component with React.lazy
 const World = lazy(() =>

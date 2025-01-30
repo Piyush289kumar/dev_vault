@@ -82,17 +82,7 @@ const words = [
   },
 ];
 
-const ReviewCard = ({
-  img,
-  name,
-  username,
-  body,
-}: {
-  img: string;
-  name: string;
-  username: string;
-  body: string;
-}) => {
+const ReviewCard = ({ img, name, username, body }) => {
   return (
     <figure
       className={cn(

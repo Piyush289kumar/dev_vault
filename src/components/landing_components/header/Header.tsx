@@ -4,6 +4,13 @@ import { useState } from "react";
 import { NavigationMenuLinks } from "./NavigationMenuLinks";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { Link } from "react-router";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
@@ -16,7 +23,17 @@ export default function Header() {
           </Link>
           {/* Desktop Navigation */}
           <NavigationMenuLinks />
-          <RainbowButton>Get Unlimited Access</RainbowButton>
+          {/* <RainbowButton>Get Unlimited Access</RainbowButton> */}
+
+          <SignedOut>
+            <SignInButton mode="modal">
+              <RainbowButton>Get Unlimited Access</RainbowButton>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"

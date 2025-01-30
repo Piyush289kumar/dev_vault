@@ -4,67 +4,7 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, MotionProps, Variants } from "motion/react";
 import { ElementType } from "react";
 
-type AnimationType = "text" | "word" | "character" | "line";
-type AnimationVariant =
-  | "fadeIn"
-  | "blurIn"
-  | "blurInUp"
-  | "blurInDown"
-  | "slideUp"
-  | "slideDown"
-  | "slideLeft"
-  | "slideRight"
-  | "scaleUp"
-  | "scaleDown";
-
-interface TextAnimateProps extends MotionProps {
-  /**
-   * The text content to animate
-   */
-  children: string;
-  /**
-   * The class name to be applied to the component
-   */
-  className?: string;
-  /**
-   * The class name to be applied to each segment
-   */
-  segmentClassName?: string;
-  /**
-   * The delay before the animation starts
-   */
-  delay?: number;
-  /**
-   * The duration of the animation
-   */
-  duration?: number;
-  /**
-   * Custom motion variants for the animation
-   */
-  variants?: Variants;
-  /**
-   * The element type to render
-   */
-  as?: ElementType;
-  /**
-   * How to split the text ("text", "word", "character")
-   */
-  by?: AnimationType;
-  /**
-   * Whether to start animation when component enters viewport
-   */
-  startOnView?: boolean;
-  /**
-   * Whether to animate only once
-   */
-  once?: boolean;
-  /**
-   * The animation preset to use
-   */
-  animation?: AnimationVariant;
-}
-
-const staggerTimings: Record<AnimationType, number> = {
+const staggerTimings = {
   text: 0.06,
   word: 0.05,
   character: 0.03,
@@ -88,7 +28,7 @@ const defaultContainerVariants = {
   },
 };
 
-const defaultItemVariants: Variants = {
+const defaultItemVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -98,15 +38,12 @@ const defaultItemVariants: Variants = {
   },
 };
 
-const defaultItemAnimationVariants: Record<
-  AnimationVariant,
-  { container: Variants; item: Variants }
-> = {
+const defaultItemAnimationVariants = {
   fadeIn: {
     container: defaultContainerVariants,
     item: {
       hidden: { opacity: 0, y: 20 },
-      show: (delay: number) => ({
+      show: (delay) => ({
         opacity: 1,
         y: 0,
         transition: {
@@ -125,7 +62,7 @@ const defaultItemAnimationVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { opacity: 0, filter: "blur(10px)" },
-      show: (i: number) => ({
+      show: (i) => ({
         opacity: 1,
         filter: "blur(0px)",
         transition: {
@@ -144,7 +81,7 @@ const defaultItemAnimationVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { opacity: 0, filter: "blur(10px)", y: 20 },
-      show: (delay: number) => ({
+      show: (delay) => ({
         opacity: 1,
         filter: "blur(0px)",
         y: 0,
@@ -170,7 +107,7 @@ const defaultItemAnimationVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { opacity: 0, filter: "blur(10px)", y: -20 },
-      show: (delay: number) => ({
+      show: (delay) => ({
         opacity: 1,
         filter: "blur(0px)",
         y: 0,
@@ -186,7 +123,7 @@ const defaultItemAnimationVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { y: 20, opacity: 0 },
-      show: (delay: number) => ({
+      show: (delay) => ({
         y: 0,
         opacity: 1,
         transition: {
@@ -278,7 +215,7 @@ const defaultItemAnimationVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { scale: 1.5, opacity: 0 },
-      show: (delay: number) => ({
+      show: (delay) => ({
         scale: 1,
         opacity: 1,
         transition: {
@@ -313,33 +250,33 @@ export function TextAnimate({
   by = "word",
   animation = "fadeIn",
   ...props
-}: TextAnimateProps) {
+}) {
   const MotionComponent = motion.create(Component);
 
   // Use provided variants or default variants based on animation type
   const finalVariants = animation
     ? {
-      container: {
-        ...defaultItemAnimationVariants[animation].container,
-        show: {
-          ...defaultItemAnimationVariants[animation].container.show,
-          transition: {
-            staggerChildren: staggerTimings[by],
+        container: {
+          ...defaultItemAnimationVariants[animation].container,
+          show: {
+            ...defaultItemAnimationVariants[animation].container.show,
+            transition: {
+              staggerChildren: staggerTimings[by],
+            },
+          },
+          exit: {
+            ...defaultItemAnimationVariants[animation].container.exit,
+            transition: {
+              staggerChildren: staggerTimings[by],
+              staggerDirection: -1,
+            },
           },
         },
-        exit: {
-          ...defaultItemAnimationVariants[animation].container.exit,
-          transition: {
-            staggerChildren: staggerTimings[by],
-            staggerDirection: -1,
-          },
-        },
-      },
-      item: defaultItemAnimationVariants[animation].item,
-    }
+        item: defaultItemAnimationVariants[animation].item,
+      }
     : { container: defaultContainerVariants, item: defaultItemVariants };
 
-  let segments: string[] = [];
+  let segments = [];
   switch (by) {
     case "word":
       segments = children.split(/(\s+)/);
@@ -374,7 +311,7 @@ export function TextAnimate({
             custom={i * staggerTimings[by]}
             className={cn(
               by === "line" ? "block" : "inline-block whitespace-pre",
-              segmentClassName,
+              segmentClassName
             )}
           >
             {segment}
