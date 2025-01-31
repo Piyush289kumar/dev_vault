@@ -5,7 +5,7 @@ const homeDashbaordImg = "/assets/app_assets/homeDashbaordImg.webp";
 export function HoverBorderGradientDemo() {
   return (
     <>
-      <div className="mx-40 flex justify-center text-center">
+      <div className="mx-3 lg:mx-24 -mt-24 md:-mt-10 flex justify-center text-center">
         <HoverBorderGradient
           containerClassName="rounded-2xl"
           as="button"

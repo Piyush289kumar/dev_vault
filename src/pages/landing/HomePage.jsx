@@ -7,7 +7,7 @@ import { GridBackground } from "@/components/ui/GridBackground";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="lg:px-16 md:px-24">
       <GridBackground />
       <HoverBorderGradientDemo />
       <KeyFeature />
