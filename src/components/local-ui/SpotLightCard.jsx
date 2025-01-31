@@ -52,30 +52,6 @@ export function SpotLightCard() {
       footerBody:
         "Ensuring your account is properly secured helps protect your personal information and data.",
     },
-    {
-      title: "Authentication steps",
-      subTitle: "Follow these steps to secure your account:",
-      steps: [
-        "Enter your email address",
-        "Create a strong password",
-        "Set up two-factor authentication",
-        "Verify your identity",
-      ],
-      footerBody:
-        "Ensuring your account is properly secured helps protect your personal information and data.",
-    },
-    {
-      title: "Authentication steps",
-      subTitle: "Follow these steps to secure your account:",
-      steps: [
-        "Enter your email address",
-        "Create a strong password",
-        "Set up two-factor authentication",
-        "Verify your identity",
-      ],
-      footerBody:
-        "Ensuring your account is properly secured helps protect your personal information and data.",
-    },
   ];
   const words = [
     {
@@ -97,28 +73,28 @@ export function SpotLightCard() {
   ];
 
   return (
-    <div className="mt-44">
+    <div className="mt-20 md:mt-28">
       <TypewriterEffectSmooth
         words={words}
-        className="flex justify-center"
+        className="flex flex-wrap justify-center"
         cursorClassName="cursor-class"
       />
-      <div className="flex flex-wrap justify-center gap-3 mx-auto mt-5">
-        {contentForCard.map((cardBody) => {
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto mt-6 md:mt-12 px-4">
+        {contentForCard.map((cardBody, index) => {
           return (
-            <CardSpotlight className="h-96 w-1/4">
-              <p className="text-xl font-bold relative z-20 mt-2 text-white">
+            <CardSpotlight key={index} className="h-96 w-full">
+              <p className="text-lg sm:text-xl font-bold relative z-20 mt-2 text-white">
                 {cardBody.title}
               </p>
               <div className="text-neutral-200 mt-4 relative z-20">
                 {cardBody.subTitle}
-                <ul className="list-none  mt-2">
-                  {cardBody.steps.map((step) => (
-                    <Step title={step} />
+                <ul className="list-none mt-2">
+                  {cardBody.steps.map((step, stepIndex) => (
+                    <Step key={stepIndex} title={step} />
                   ))}
                 </ul>
               </div>
-              <p className="text-neutral-300 mt-4 relative z-20 text-sm">
+              <p className="text-neutral-300 mt-4 relative z-20 text-xs sm:text-sm">
                 {cardBody.footerBody}
               </p>
             </CardSpotlight>

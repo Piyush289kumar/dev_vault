@@ -395,40 +395,38 @@ export function GlobeModel() {
   ];
 
   return (
-    <div className="flex flex-row items-center justify-center py-20 h-screen md:h-auto dark:bg-black bg-white relative w-[85%]">
-      <div className="max-w-7xl mx-auto w-2/3 relative overflow-hidden h-full md:h-[40rem] px-4">
+    <div className="flex flex-col md:flex-row items-center justify-center py-10 md:py-20 min-h-screen dark:bg-black bg-white w-full px-4">
+      <div className="max-w-7xl mx-auto w-full md:w-2/3 relative overflow-hidden md:h-[40rem] px-4">
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 1,
-          }}
-          className="div"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-center"
         >
-          <h2 className="text-center text-xl md:text-4xl font-bold text-black dark:text-white">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-black dark:text-white">
             We sell soap worldwide
           </h2>
-          <p className="text-center text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-md mt-2 mx-auto">
+          <p className="text-base sm:text-lg md:text-xl font-normal text-neutral-700 dark:text-neutral-200 max-w-md mt-2 mx-auto">
             This globe is interactive and customizable. Have fun with it, and
             don&apos;t forget to share it. :)
           </p>
         </motion.div>
-        <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40" />
 
-        {/* Wrap the World component with Suspense */}
-        <div className="absolute w-full -bottom-20 h-72 md:h-full z-10">
+        {/* Gradient Overlay */}
+        <div className="absolute w-full bottom-0 inset-x-0 h-32 md:h-40 bg-gradient-to-b from-transparent dark:to-black to-white pointer-events-none select-none z-40" />
+
+        {/* Responsive Globe */}
+        <div className="relative w-full h-64 sm:h-72 md:h-full flex justify-center items-center z-10">
           <Suspense fallback={<div>Loading globe...</div>}>
             <World data={sampleArcs} globeConfig={globeConfig} />
           </Suspense>
         </div>
       </div>
-      <ContactForm />
+
+      {/* Contact Form */}
+      <div className="w-full md:w-1/3 px-0 mt-0">
+        <ContactForm />
+      </div>
     </div>
   );
 }

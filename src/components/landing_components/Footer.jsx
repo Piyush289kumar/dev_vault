@@ -1,11 +1,13 @@
 function Footer() {
   return (
-    <footer className="flex justify-between items-center p-6 bg-black text-white w-[85%] mx-auto border-t-2">
+    <footer className="flex flex-col md:flex-row justify-between items-center p-6 bg-black text-white w-[85%] mx-auto border-t-2">
       {/* Left Side: Logo */}
-      <div className="text-lg font-bold">{import.meta.env.VITE_APP_NAME}</div>
+      <div className="text-lg font-bold mb-4 md:mb-0">
+        {import.meta.env.VITE_APP_NAME}
+      </div>
 
       {/* Right Side: Links */}
-      <nav className="flex gap-6 text-xs">
+      <nav className="flex flex-col md:flex-row gap-4 md:gap-6 text-xs text-center md:text-left">
         <a href="/pricing" className="hover:text-gray-400">
           Pricing
         </a>

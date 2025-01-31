@@ -111,7 +111,7 @@ const ReviewCard = ({ img, name, username, body }) => {
 
 export default function MarqueeVertical() {
   return (
-    <div className="mt-44">
+    <div className="mt-20 md:mt-28">
       <TypewriterEffectSmooth
         words={words}
         className="flex justify-center"
@@ -121,7 +121,7 @@ export default function MarqueeVertical() {
         Creem is used by companies of every size. <br /> Here's what some of
         them have to say.
       </p>
-      <div className="relative flex h-[700px] w-[80%] mx-auto flex-row items-center justify-center overflow-hidden rounded-lg bg-black md:shadow-xl gap-x-3 mt-5">
+      <div className="relative flex flex-wrap md:flex-nowrap h-[700px] w-[80%] mx-auto flex-row items-center justify-center overflow-hidden rounded-lg bg-black md:shadow-xl gap-x-3 mt-5">
         <Marquee pauseOnHover vertical className="[--duration:26s]">
           {firstRow.map((review) => (
             <ReviewCard key={review.username} {...review} />
