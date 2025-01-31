@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Menu, Home, Info, Mail, Layers } from "lucide-react"; // Importing icons
-import { useState } from "react";
+import { Menu } from "lucide-react"; // Importing icons
+import { useEffect, useState } from "react";
 import { NavigationMenuLinks } from "./NavigationMenuLinks";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { Link } from "react-router";
@@ -13,69 +13,69 @@ import {
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="w-full shadow-sm border-b-[0.5px] border-zinc-600">
+    <header
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 border-b border-zinc-600 ${
+        isScrolled ? "backdrop-blur-md bg-white/10" : "bg-black"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-3">
           {/* Logo */}
-          <Link to={"/"} className="font-bold uppercase">
+          <Link to={"/"} className="font-bold uppercase text-white">
             {import.meta.env.VITE_APP_NAME}
           </Link>
-          {/* Desktop Navigation */}
-          <NavigationMenuLinks />
-          {/* <RainbowButton>Get Unlimited Access</RainbowButton> */}
 
-          <SignedOut>
-            <SignInButton mode="modal">
-              <RainbowButton>Get Unlimited Access</RainbowButton>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          {/* Navigation Menu - Hidden on Small Screens */}
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 md:justify-center">
+            <NavigationMenuLinks />
+          </div>
+
+          {/* Auth Buttons - Hidden on Small Screens */}
+          <div className="hidden md:flex items-center gap-4">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <RainbowButton>Get Unlimited Access</RainbowButton>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
 
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden"
+            className="md:hidden text-white"
           >
             <Menu size={24} />
           </Button>
         </div>
       </div>
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Shown on Click */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
-          <nav className="space-y-2 p-4">
-            <a
-              href="/"
-              className="flex items-center gap-2 text-gray-700 hover:text-blue-500"
-            >
-              <Home size={20} />
-              Home
-            </a>
-            <a
-              href="/about"
-              className="flex items-center gap-2 text-gray-700 hover:text-blue-500"
-            >
-              <Info size={20} />
-              About
-            </a>
-            <a
-              href="/services"
-              className="flex items-center gap-2 text-gray-700 hover:text-blue-500"
-            >
-              <Layers size={20} />
-              Services
-            </a>
-            <a
-              href="/contact"
-              className="flex items-center gap-2 text-gray-700 hover:text-blue-500"
-            >
-              <Mail size={20} />
-              Contact
-            </a>
+        <div className="md:hidden bg-white/10 backdrop-blur-md border-t border-gray-200 p-4 space-y-2 text-white">
+          <nav className="flex flex-col gap-3">
+            <NavigationMenuLinks />
+            <SignedOut>
+              <SignInButton mode="modal">
+                <RainbowButton>Get Unlimited Access</RainbowButton>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </nav>
         </div>
       )}
