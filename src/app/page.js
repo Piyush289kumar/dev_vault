@@ -3,6 +3,7 @@
 import { SoftwarePortfolioCanvasRevealEffect } from "@/components/landiingPageUI/SoftwarePortfolioSection";
 import { FeatureCard } from "@/components/landiingPageUI/WobbleCard";
 import { GridBackground } from "@/components/ui/GridBackGround";
+import Footer from "@/components/landiingPageUI/Footer/Footer"; 
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <GridBackground />
       <FeatureCard />
       <SoftwarePortfolioCanvasRevealEffect />
+      <Footer />
     </>
   );
 }
