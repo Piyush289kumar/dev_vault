@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="104" height="42" fill="none">
+  <path fill="#EEEEF0"
+    d="M67.002 40c0-2.128 0-5.078-.332-9.238-.41-4.178-2.635-6.296-6.442-7.04 4.51-.573 7.848-4.007 7.848-9.274C68.076 7.408 63.332 3 53.786 3h-17.71v7.338h15.952c4.217 0 6.326 1.769 6.326 4.688 0 3.32-2.109 4.574-6.326 4.574H36.076V27.1H51.56c3.338 0 5.154.916 5.447 5.037.221 2.815.193 4.209.167 5.545v.001c-.009.43-.017 1.854-.017 2.318h9.845Z" />
+  <path fill="url(#paint0_linear_485_6345)" fill-opacity=".4"
+    d="M67.002 40c0-2.128 0-5.078-.332-9.238-.41-4.178-2.635-6.296-6.442-7.04 4.51-.573 7.848-4.007 7.848-9.274C68.076 7.408 63.332 3 53.786 3h-17.71v7.338h15.952c4.217 0 6.326 1.769 6.326 4.688 0 3.32-2.109 4.574-6.326 4.574H36.076V27.1H51.56c3.338 0 5.154.916 5.447 5.037.221 2.815.193 4.209.167 5.545v.001c-.009.43-.017 1.854-.017 2.318h9.845Z"
+    style="mix-blend-mode:overlay" />
+  <path fill="#EEEEF0" d="m36 34 .076 6h12v-3.943s0-2.057-2-2.057H36Z" />
+  <path fill="url(#paint1_linear_485_6345)" fill-opacity=".4" d="m36 34 .076 6h12v-3.943s0-2.057-2-2.057H36Z"
+    style="mix-blend-mode:overlay" />
+  <defs>
+    <linearGradient id="paint0_linear_485_6345" x1="52.038" x2="52.038" y1="3" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" />
+      <stop offset=".775" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="paint1_linear_485_6345" x1="52.038" x2="52.038" y1="3" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" />
+      <stop offset=".775" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+</svg>
