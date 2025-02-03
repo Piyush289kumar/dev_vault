@@ -16,5 +16,10 @@ export const sendVerificationEmail = async (email, userId) => {
     html: `<p>Please verify your email by clicking <a href="${process.env.NEXT_PUBLIC_URL}/auth/verify?user=${userId}">here</a>.</p>`,
   };
 
-  await transporter.sendMail(mailOptions);
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error("Email Sending Error: ", error);
+    throw new Error("Failed to send verification email");
+  }
 };
