@@ -1,35 +1,34 @@
-// src/app/auth/verify/[user].js
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import userModel from "@/models/userModel";
+import { NextResponse } from "next/server";
 
-const VerifyPage = () => {
-  const router = useRouter();
-  const { user } = router.query;  // Capture the `user` dynamic parameter from the URL
-  const [message, setMessage] = useState(null);
+export async function POST(request) {
+  try {
+    const { userId } = await request.json(); // Get userId from request body
 
-  useEffect(() => {
-    if (user) {
-      // Call the API to verify the user (you can pass the user ID here)
-      const verifyUser = async () => {
-        try {
-          const res = await fetch(`/api/auth/verify?user=${user}`);
-          const data = await res.json();
-          setMessage(data.message);  // Display the response message
-        } catch (error) {
-          setMessage("Error verifying user.");
-        }
-      };
-      verifyUser();
+    if (!userId) {
+      return NextResponse.json({ message: "User ID is missing" }, { status: 400 });
     }
-  }, [user]);
 
-  return (
-    <div>
-      <h1>Email Verification</h1>
-      {user && <p>User ID: {user}</p>}  {/* Display the user ID */}
-      {message ? <p>{message}</p> : <p>Verifying...</p>}
-    </div>
-  );
-};
+    // Find user and update verification status
+    const user = await userModel.findOneAndUpdate(
+      { _id: userId },
+      { isVerified: true }, // Correctly updating verification field
+      { new: true } // Return the updated document
+    );
 
-export default VerifyPage;
+    if (user) {
+      return NextResponse.json({ message: "User verified successfully!" });
+    } else {
+      return NextResponse.json(
+        { message: "Verification failed. User not found." },
+        { status: 404 }
+      );
+    }
+  } catch (error) {
+    console.error("Error verifying user:", error);
+    return NextResponse.json(
+      { message: "An error occurred during verification." },
+      { status: 500 }
+    );
+  }
+}
