@@ -6,7 +6,10 @@ export async function POST(request) {
     const { userId } = await request.json(); // Get userId from request body
 
     if (!userId) {
-      return NextResponse.json({ message: "User ID is missing" }, { status: 400 });
+      return NextResponse.json(
+        { message: "User ID is missing" },
+        { status: 400 }
+      );
     }
 
     // Find user and update verification status
@@ -17,7 +20,10 @@ export async function POST(request) {
     );
 
     if (user) {
-      return NextResponse.json({ message: "User verified successfully!" });
+      return NextResponse.json(
+        { message: "User verified successfully!", user },
+        { status: 200 }
+      );
     } else {
       return NextResponse.json(
         { message: "Verification failed. User not found." },
