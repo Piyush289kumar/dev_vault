@@ -6,7 +6,6 @@ import { AuroraText } from "@/components/ui/aurora-text";
 import { SparklesText } from "@/components/ui/sparkles-text";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import Image from "next/image";
 import { ContainerScroll } from "./container-scroll-animation";
 
