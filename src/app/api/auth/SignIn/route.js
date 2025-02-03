@@ -1,31 +1,76 @@
 import { dbConnect } from "@/lib/dbConnect";
 import User from "@/models/userModel";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { signJwtToken } from "@/lib/jwt";
+import { setAuthCookie } from "@/lib/cookies";
+import { errorHandler } from "@/utils/errorHandler";
+import { z } from "zod";
+
+// Define request validation schema
+const signInSchema = z.object({
+  email: z.string().email("Invalid email format"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number")
+    .regex(
+      /[!@#$%^&*(),.?":{}|<>]/,
+      "Password must contain at least one special character"
+    ),
+});
 
 export async function POST(req) {
-  await dbConnect();
-  const { email, password } = await req.json();
+  try {
+    await dbConnect();
 
-  const user = await User.findOne({ email });
-  if (!user)
-    return new Response(JSON.stringify({ message: "User not found" }), {
-      status: 404,
-    });
+    const body = await req.json();
+    const parsed = signInSchema.safeParse(body);
 
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch)
-    return new Response(JSON.stringify({ message: "Invalid credentials" }), {
-      status: 401,
-    });
+    if (!parsed.success) {
+      return new Response(
+        JSON.stringify({
+          message: "Validation failed",
+          errors: parsed.error.format(),
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
 
-  // Generate JWT token
-  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "7d",
-  });
+    const { email, password } = parsed.data;
 
-  return new Response(JSON.stringify({ message: "Login successful", token }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+    // Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return new Response(JSON.stringify({ message: "User not found" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // Check password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return new Response(JSON.stringify({ message: "Invalid credentials" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // Generate JWT token
+    const token = signJwtToken({ _id: user._id, role: user.role });
+
+    // Set token as HTTP-only secure cookie
+    const cookie = setAuthCookie(token);
+
+    return new Response(
+      JSON.stringify({ message: "Login successful", token }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (error) {
+    return errorHandler(error, "Error during sign-in");
+  }
 }

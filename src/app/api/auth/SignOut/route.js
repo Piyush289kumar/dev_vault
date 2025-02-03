@@ -1,34 +1,10 @@
-import { dbConnect } from "@/lib/dbConnect";
-import User from "@/models/userModel";
-import bcrypt from "bcryptjs";
-import { sendVerificationEmail } from "@/utils/email";
+import { clearAuthCookie } from "@/lib/cookies";
 
-export async function GET() {
-  
-  return new Response(
-    JSON.stringify({ message: "GET" }),
-    { status: 200 }
-  );
-}
-
-
-export async function POST(req) {
-  await dbConnect();
-  const { name, email, password } = await req.json();
-
-  const existingUser = await User.findOne({ email });
-  if (existingUser)
-    return new Response(JSON.stringify({ message: "Email already in use" }), {
-      status: 400,
-    });
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await User.create({ name, email, password: hashedPassword });
-
-  // await sendVerificationEmail(user.email, user._id);
+export async function POST() {
+  const cookie = clearAuthCookie();
 
   return new Response(
-    JSON.stringify({ message: "User registered. Please verify your email." }),
-    { status: 201 }
+    JSON.stringify({ message: "Logged out successfully" }),
+    { status: 200, headers: { "Content-Type": "application/json", "Set-Cookie": cookie } }
   );
 }
