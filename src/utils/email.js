@@ -13,7 +13,7 @@ export const sendVerificationEmail = async (email, userId) => {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Verify your email",
-    html: `<p>Please verify your email by clicking <a href="${process.env.NEXT_PUBLIC_URL}/auth/verify?user=${userId}">here</a>.</p>`,
+    html: `<p>Please verify your email by clicking <a href="${process.env.NEXT_PUBLIC_URL}/auth/verify/${userId}">here</a>.</p>`,
   };
 
   try {
