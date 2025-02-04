@@ -69,7 +69,7 @@ export default function Page({ params }) {
   useEffect(() => {
     if (isVerified) {
       setTimeout(() => {
-        router.push("/api/auth/SignIn");
+        router.push("/auth/sign-in");
       }, 2000);
     }
   }, [isVerified, router]);

@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -6,11 +6,12 @@ import { Label } from "@/components/ui/label";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { LoaderCircle } from "lucide-react";
 
 // Function to handle SignIn API request
 async function signIn({ email, password }) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/auth/signin`,
+    `${process.env.NEXT_PUBLIC_URL}/api/auth/sign-in`,
     {
       method: "POST",
       headers: {
@@ -33,11 +34,11 @@ export function LoginForm({ className, ...props }) {
   const [password, setPassword] = useState("");
 
   // Use mutation hook properly
-  const { mutate, isLoading, isError, error, isSuccess, data } = useMutation({
+  const mutation = useMutation({
     mutationFn: signIn,
     onSuccess: (data) => {
       console.log("Login Success:", data);
-      alert('Login Success');
+      alert("Login Success");
       // Handle success logic, e.g., redirect
     },
     onError: (error) => {
@@ -48,7 +49,7 @@ export function LoginForm({ className, ...props }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate({ email, password });
+    mutation.mutate({ email, password });
   };
 
   return (
@@ -59,13 +60,17 @@ export function LoginForm({ className, ...props }) {
           as="button"
           className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 p-0"
         >
-          <CardContent className="grid p-0 md:grid-cols-2">
-            <form onSubmit={handleSubmit} className="p-6 md:p-8 w-auto lg:w-[350px]">
+          <CardContent className="grid p-0 md:grid-cols-2 text-start">
+            <form
+              onSubmit={handleSubmit}
+              className="p-6 md:p-8 w-auto lg:w-[350px]"
+            >
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
                   <h1 className="text-2xl font-bold">Welcome back</h1>
                   <p className="text-balance text-muted-foreground">
-                    Login to your {process.env.NEXT_APP_NAME ?? "Dev Vault Tech"} account
+                    Login to your{" "}
+                    {process.env.NEXT_APP_NAME ?? "Dev Vault Tech"} account
                   </p>
                 </div>
                 <div className="grid gap-2">
@@ -98,18 +103,26 @@ export function LoginForm({ className, ...props }) {
                   />
                 </div>
 
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Logging in..." : "Login"}
+                <Button
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-2"
+                  disabled={mutation.isPending}
+                >
+                  {mutation.isPending && (
+                    <LoaderCircle className="animate-spin w-5 h-5" />
+                  )}
+                  {mutation.isPending ? "Signing in..." : "Sign In"}
                 </Button>
 
-                {isError && (
+                {mutation.isError && (
                   <div className="text-red-500 mt-2 text-center">
-                    {error.message || "Login failed, please try again."}
+                    {mutation.error.message ||
+                      "Sign in failed, please try again."}
                   </div>
                 )}
-                {isSuccess && (
+                {mutation.isSuccess && (
                   <div className="text-green-500 mt-2 text-center">
-                    {data.message || "Login successful!"}
+                    {data.message || "Sign in successful!"}
                   </div>
                 )}
 
