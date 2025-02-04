@@ -8,7 +8,7 @@ import { serialize } from "cookie";
 export function setAuthCookie(token) {
   return serialize("auth_token", token, {
     httpOnly: true, // Prevents JavaScript access (XSS protection)
-    secure: process.env.NODE_ENV === "production", // Use secure flag in production
+    secure: process.env.NEXT_NODE_ENV === "production", // Use secure flag in production
     sameSite: "strict", // Prevents CSRF attacks
     path: "/", // Cookie accessible in all routes
     maxAge: 3 * 24 * 60 * 60, // 3 days expiration

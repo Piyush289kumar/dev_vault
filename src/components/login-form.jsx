@@ -10,13 +10,14 @@ import { useState } from "react";
 // Function to handle SignIn API request
 async function signIn({ email, password }) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/auth/SignIn`,
+    `${process.env.NEXT_PUBLIC_URL}/api/auth/signin`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
+      credentials: "include",
     }
   );
 
@@ -59,12 +60,12 @@ export function LoginForm({ className, ...props }) {
           className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 p-0"
         >
           <CardContent className="grid p-0 md:grid-cols-2">
-            <form onSubmit={handleSubmit} className="p-6 md:p-8">
+            <form onSubmit={handleSubmit} className="p-6 md:p-8 w-auto lg:w-[350px]">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
                   <h1 className="text-2xl font-bold">Welcome back</h1>
                   <p className="text-balance text-muted-foreground">
-                    Login to your Acme Inc account
+                    Login to your {process.env.NEXT_APP_NAME ?? "Dev Vault Tech"} account
                   </p>
                 </div>
                 <div className="grid gap-2">
