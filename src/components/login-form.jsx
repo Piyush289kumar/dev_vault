@@ -7,6 +7,7 @@ import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { LoaderCircle } from "lucide-react";
+import { useRouter } from "next/navigation"; // Import useRouter for navigation
 
 // Function to handle SignIn API request
 async function signIn({ email, password }) {
@@ -22,23 +23,19 @@ async function signIn({ email, password }) {
     }
   );
 
-  if (!response.ok) {
-    throw new Error("SignIn failed");
-  }
-
   return response.json();
 }
 
 export function LoginForm({ className, ...props }) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // Use mutation hook properly
   const mutation = useMutation({
     mutationFn: signIn,
-    onSuccess: (data) => {
-      console.log("Login Success:", data);
-      alert("Login Success");
+    onSuccess: () => {
+      router.push("/dashboard");
       // Handle success logic, e.g., redirect
     },
     onError: (error) => {
