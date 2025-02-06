@@ -134,5 +134,3 @@ dev_vault
 │       └── helper.js
 ├── tailwind.config.js
 └── tailwind.config.mjs
-
-37 directories, 99 files

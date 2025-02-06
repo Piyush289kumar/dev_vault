@@ -1,38 +1,42 @@
 import jwt from "jsonwebtoken";
 
 /**
- * Generate a JWT token for a user
+ * Generate Access and Refresh Tokens
  * @param {Object} user - The user object containing `_id` and `role`
- * @returns {string} - The signed JWT token
+ * @returns {Object} - Access and Refresh tokens
  */
-export function signJwtToken(user) {
-  if (!process.env.JWT_SECRET) {
-    throw new Error("JWT_SECRET is not defined in environment variables.");
+export function generateTokens(user) {
+  if (!process.env.JWT_ACCESS_SECRET || !process.env.JWT_REFRESH_SECRET) {
+    throw new Error("-JWT_ACCESS_SECRET or JWT_REFRESH_SECRET is not set.");
   }
 
-  return jwt.sign(
+  const accessToken = jwt.sign(
     { id: user._id, role: user.role },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "3d",
-    }
+    process.env.JWT_ACCESS_SECRET,
+    { expiresIn: "15m" } // Short-lived token
   );
+
+  const refreshToken = jwt.sign(
+    { id: user._id },
+    process.env.JWT_REFRESH_SECRET,
+    { expiresIn: "7d" } // Long-lived token
+  );
+
+  return { accessToken, refreshToken };
 }
 
 /**
- * Verify a JWT token
+ * Verify a JWT Token
  * @param {string} token - The JWT token to verify
+ * @param {string} secret - The secret key
  * @returns {Object | null} - Decoded token payload or null if invalid
  */
-export function verifyJwtToken(token) {
-  if (!process.env.JWT_SECRET) {
-    throw new Error("JWT_SECRET is not defined in environment variables.");
-  }
-
+export function verifyToken(token, secret) {
   try {
-    return jwt.verify(token, process.env.JWT_SECRET);
+    return jwt.verify(token, secret);
   } catch (error) {
     console.error("JWT Verification Error:", error.message);
     return null;
   }
 }
+  
