@@ -1,0 +1,138 @@
+dev_vault
+├── components.json
+├── eslint.config.mjs
+├── jsconfig.json
+├── middleware.js
+├── next.config.mjs
+├── output.css
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── postcss.config.mjs
+├── public
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── landing_assets
+│   │   ├── Images
+│   │   │   ├── homeDashbaordImg.webp
+│   │   │   └── linear.webp
+│   │   └── svg
+│   │       └── logo_svg
+│   │           ├── astro.svg
+│   │           ├── convex.svg
+│   │           ├── expo.svg
+│   │           ├── firebase.svg
+│   │           ├── nextjs.svg
+│   │           ├── reactjs.svg
+│   │           ├── remix.svg
+│   │           └── superbase.svg
+│   ├── next.svg
+│   ├── noise.webp
+│   ├── vercel.svg
+│   └── window.svg
+├── README.md
+├── src
+│   ├── app
+│   │   ├── api
+│   │   │   ├── admin
+│   │   │   │   └── route.js
+│   │   │   ├── auth
+│   │   │   │   ├── sign-in
+│   │   │   │   │   └── route.js
+│   │   │   │   ├── sign-out
+│   │   │   │   │   └── route.js
+│   │   │   │   ├── sign-up
+│   │   │   │   │   └── route.js
+│   │   │   │   └── verify
+│   │   │   │       └── route.js
+│   │   │   ├── developer
+│   │   │   │   └── route.js
+│   │   │   ├── protected.js
+│   │   │   ├── services
+│   │   │   │   └── route.js
+│   │   │   ├── test.js
+│   │   │   ├── users
+│   │   │   │   └── route.js
+│   │   │   └── wekhooks
+│   │   │       └── route.js
+│   │   ├── auth
+│   │   │   ├── sign-in
+│   │   │   │   └── page.js
+│   │   │   ├── sign-up
+│   │   │   │   └── page.js
+│   │   │   └── verify
+│   │   │       └── [userId]
+│   │   │           └── page.js
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.js
+│   │   └── page.js
+│   ├── components
+│   │   ├── landiingPageUI
+│   │   │   ├── Footer
+│   │   │   │   ├── FeatureSections.jsx
+│   │   │   │   ├── Footer.jsx
+│   │   │   │   └── JoinUsBlock.jsx
+│   │   │   ├── Header
+│   │   │   │   ├── Header.jsx
+│   │   │   │   └── NavigationMenuLinks.jsx
+│   │   │   ├── SoftwarePortfolioSection.jsx
+│   │   │   ├── TerminalBox.jsx
+│   │   │   └── WobbleCard.jsx
+│   │   ├── login-form.jsx
+│   │   ├── register-form.jsx
+│   │   └── ui
+│   │       ├── alert-dialog.jsx
+│   │       ├── animated-gradient-text.jsx
+│   │       ├── aurora-text.jsx
+│   │       ├── button.jsx
+│   │       ├── canvas-reveal-effect.jsx
+│   │       ├── card.jsx
+│   │       ├── card-spotlight.jsx
+│   │       ├── container-scroll-animation.jsx
+│   │       ├── GridBackGround.jsx
+│   │       ├── hover-border-gradient.jsx
+│   │       ├── hyper-text.jsx
+│   │       ├── input.jsx
+│   │       ├── interactive-hover-button.jsx
+│   │       ├── label.jsx
+│   │       ├── navigation-menu.jsx
+│   │       ├── rainbow-button.jsx
+│   │       ├── sparkles-text.jsx
+│   │       ├── terminal.jsx
+│   │       └── wobble-card.jsx
+│   ├── config
+│   │   ├── constants.js
+│   │   └── env.js
+│   ├── Http
+│   │   └── Middleware
+│   │       └── clerk-middleware.ts
+│   ├── lib
+│   │   ├── auth.js
+│   │   ├── cookies.js
+│   │   ├── dbConnect.js
+│   │   ├── jwt.js
+│   │   ├── utils.js
+│   │   └── utils.ts
+│   ├── middleware
+│   │   ├── authMiddleware.js
+│   │   └── roleMiddleware.js
+│   ├── models
+│   │   ├── logModel.js
+│   │   ├── serviceModel.js
+│   │   ├── Token.js
+│   │   └── userModel.js
+│   ├── services
+│   │   ├── adminService.js
+│   │   ├── authService.js
+│   │   ├── developerService.js
+│   │   ├── serviceService.js
+│   │   └── userService.js
+│   └── utils
+│       ├── email.js
+│       ├── errorHandler.js
+│       └── helper.js
+├── tailwind.config.js
+└── tailwind.config.mjs
+
+37 directories, 99 files

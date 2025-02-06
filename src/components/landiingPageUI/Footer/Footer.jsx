@@ -12,7 +12,7 @@ function Footer() {
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
           {/* Left - Logo */}
           <div className="mb-4 md:mb-0">
-            <img src="/logo.png" alt="Logo" className="h-10" />
+            <img src="/favicon.ico" alt="Logo" className="h-10" />
           </div>
 
           {/* Right - Links (Responsive) */}

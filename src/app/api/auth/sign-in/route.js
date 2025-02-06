@@ -67,8 +67,8 @@ export async function POST(req) {
     const cookie = setAuthCookie(token);
 
     return new Response(
-      // JSON.stringify({ message: "Login successful", token }),
-      JSON.stringify({ message: "Login successful" }),
+      JSON.stringify({ message: "Login successful", token }),
+      // JSON.stringify({ message: "Login successful" }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", "Set-Cookie": cookie },
