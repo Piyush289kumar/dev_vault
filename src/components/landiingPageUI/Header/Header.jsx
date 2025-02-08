@@ -40,7 +40,7 @@ export default function Header() {
           {/* Auth Buttons - Hidden on Small Screens */}
           <div className="hidden md:flex items-center gap-4">
             <RainbowButton className="text-sm h-9 px-5">
-              Get Unlimited Access
+              <Link href={"/auth/sign-in"}>Get Unlimited Access</Link>
             </RainbowButton>
 
             {/* <SignedOut>
