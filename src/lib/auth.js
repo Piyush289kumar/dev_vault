@@ -2,30 +2,31 @@ import { dbConnect } from "@/lib/dbConnect";
 import User from "@/models/userModel";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 
-export async function POST(req) {
-  await dbConnect();
-  const { email, password } = await req.json();
+export async function getUserById(userId) {
+    try {
+        await dbConnect();
+        const user = await User.findById(userId).select("-password"); // Exclude password
+        return user || null;
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        return null;
+    }
+}
+export async function getUserSession() {
+    try {
+        const cookieStore = await cookies(); // No need to `await`
+        const token = cookieStore.get("access_token")?.value;
 
-  const user = await User.findOne({ email });
-  if (!user)
-    return new Response(JSON.stringify({ message: "User not found" }), {
-      status: 401,
-    });
-
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch)
-    return new Response(JSON.stringify({ message: "Invalid credentials" }), {
-      status: 401,
-    });
-
-  const token = jwt.sign(
-    { id: user._id, role: user.role },
-    process.env.JWT_ACCESS_SECRET,
-    { expiresIn: "1d" }
-  );
-
-  return new Response(JSON.stringify({ token, role: user.role }), {
-    status: 200,
-  });
+        if (!token) {
+            console.warn("No access_token found in cookies.");
+            return null;
+        }
+        const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+        return decoded.id || null;
+    } catch (error) {
+        console.error("Error verifying JWT:", error);
+        return null;
+    }
 }

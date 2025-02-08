@@ -156,11 +156,14 @@ const data = {
   ],
 }
 
-export function AppSidebar({
+export function AppSidebar({  
   ...props
 }) {
   return (
-    (<Sidebar collapsible="icon" {...props}>
+    (
+      
+    <Sidebar collapsible="icon" {...props}>
+
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
@@ -169,7 +172,7 @@ export function AppSidebar({
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={props.user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>)
