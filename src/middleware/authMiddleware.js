@@ -1,7 +1,8 @@
 import { getUserSession } from "@/lib/auth";
 
 export async function protectRoute(role) {
-    const user = getUserSession(); // Don't await, it's not async
+    const user = await getUserSession(); // ✅ Add await
+
 
     if (!user) {
         console.warn("No user session found, redirecting...");

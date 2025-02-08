@@ -7,10 +7,12 @@ import { Label } from "@/components/ui/label";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+
 import { LoaderCircle } from "lucide-react";
 // import { signIn} from "next-auth/react";
 import { useRouter } from "next/navigation"; // Import useRouter for navigation
 import Link from "next/link";
+
 // Function to handle SignIn API request
 async function signInWithUserCredentials({ email, password }) {
   const response = await fetch(
@@ -31,18 +33,19 @@ export function LoginForm({ className, ...props }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // Use mutation hook properly
-  
+
   const roleRoutes = {
     admin: "/dashboard/admin",
     developer: "/dashboard/developer",
     client: "/dashboard/client",
   };
-  
+
+
   const mutation = useMutation({
     mutationFn: signInWithUserCredentials,
-    onSuccess: (data) => {  
-      console.log('data', data);
-        
+    onSuccess: (data) => {
+      console.log("data", data);
+
       if (data?.role && roleRoutes[data.role]) {
         router.push(roleRoutes[data.role]); // Redirect based on role
       } else {
@@ -52,7 +55,9 @@ export function LoginForm({ className, ...props }) {
     },
     onError: (error) => {
       console.error("Login Error:", error);
-      alert(error?.response?.data?.message || "An error occurred during login.");
+      alert(
+        error?.response?.data?.message || "An error occurred during login."
+      );
     },
   });
 
@@ -72,7 +77,7 @@ export function LoginForm({ className, ...props }) {
   //     alert(error?.response?.data?.message || "An error occurred during login.");
   //   },
   // });
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     mutation.mutate({ email, password });
