@@ -29,11 +29,34 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useRouter } from "next/navigation";
 
 export function NavUser({
   user
 }) {
   const { isMobile } = useSidebar()
+
+
+  const router = useRouter();
+
+    const handleLogout = async () => {
+        try {
+            const response = await fetch("/api/auth/sign-out", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (response.ok) {
+                router.push("/auth/sign-in"); // Redirect to login after logout
+            } else {
+                console.error("Logout failed");
+            }
+        } catch (error) {
+            console.error("Error logging out:", error);
+        }
+    };
 
   return (
     (<SidebarMenu>
@@ -94,7 +117,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>
