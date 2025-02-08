@@ -290,10 +290,10 @@ export function SoftwarePortfolioCanvasRevealEffect() {
   return (
     <>
       <div className="text-center mt-8 md:mt-28">
-        <h1 class="text-gray-900 dark:text-zinc-50 font-extrabold text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight">
+        <h1 className="text-gray-900 dark:text-zinc-50 font-extrabold text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight">
           Everything you need for authentication
         </h1>
-        <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base md:text-lg lg:text-xl mt-4">
+        <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base md:text-lg lg:text-xl mt-4">
           Ever feel like authentication requirements change with the season?
           <br />
           Clerk keeps up with the latest trends and security best practices.

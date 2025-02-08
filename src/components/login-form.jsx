@@ -31,28 +31,48 @@ export function LoginForm({ className, ...props }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // Use mutation hook properly
-
+  
+  const roleRoutes = {
+    admin: "/dashboard/admin",
+    developer: "/dashboard/developer",
+    client: "/dashboard/client",
+  };
+  
   const mutation = useMutation({
     mutationFn: signInWithUserCredentials,
-    onSuccess: (data) => {
-      if (data?.message === "Login successful") {
-        // Check user role from response
-        if (data.role === "admin") {
-          router.push('/dashboard/admin');
-        } else if (data.role === "developer") {
-          router.push('/dashboard/developer');
-        } else {
-          router.push('/dashboard/client');
-        }
+    onSuccess: (data) => {  
+      console.log('data', data);
+        
+      if (data?.role && roleRoutes[data.role]) {
+        router.push(roleRoutes[data.role]); // Redirect based on role
       } else {
-        alert(data?.message || "Login failed. Please try again.");
+        alert("Invalid role. Contact support.");
+        router.push("/"); // Default fallback
       }
     },
     onError: (error) => {
       console.error("Login Error:", error);
-      alert(error?.message || "An error occurred during login.");
+      alert(error?.response?.data?.message || "An error occurred during login.");
     },
   });
+
+  // const mutation = useMutation({
+  //   mutationFn: signInWithUserCredentials,
+  //   onSuccess: (data) => {
+  //     if (data?.message === "Login successful") {
+  //       // Redirect based on user role
+  //       const route = roleRoutes[data.role] || "/dashboard/client";
+  //       router.push(route);
+  //     } else {
+  //       alert(data?.message || "Login failed. Please try again.");
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     console.error("Login Error:", error);
+  //     alert(error?.response?.data?.message || "An error occurred during login.");
+  //   },
+  // });
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     mutation.mutate({ email, password });

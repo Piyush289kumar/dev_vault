@@ -53,7 +53,7 @@ export async function POST(req) {
     const refreshCookie = setRefreshTokenCookie(refreshToken);
 
     return new Response(
-      JSON.stringify({ message: "Login successful", accessToken }),
+      JSON.stringify({ message: "Login successful", accessToken, role: user.role }),
       {
         status: 200,
         headers: {
