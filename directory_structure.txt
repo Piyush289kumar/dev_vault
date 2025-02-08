@@ -1,7 +1,8 @@
-.
+dev_vault
 ├── ab.pub
 ├── components.json
 ├── directory_structure.txt
+├── electron.js
 ├── eslint.config.mjs
 ├── GoogleInfo
 │   └── client_secret_1086913419451-sbajvik4davo7g7vjkfk130jb47u8ak5.apps.googleusercontent.com.json
@@ -53,6 +54,7 @@
 │   │   │   │   │   └── route.js
 │   │   │   │   └── verify
 │   │   │   │       └── route.js
+│   │   │   ├── client
 │   │   │   ├── developer
 │   │   │   │   └── route.js
 │   │   │   ├── protected.js
@@ -60,6 +62,7 @@
 │   │   │   │   └── route.js
 │   │   │   ├── test.js
 │   │   │   ├── users
+│   │   │   │   ├── [id]
 │   │   │   │   └── route.js
 │   │   │   └── wekhooks
 │   │   │       └── route.js
@@ -71,11 +74,23 @@
 │   │   │   └── verify
 │   │   │       └── [userId]
 │   │   │           └── page.js
+│   │   ├── dashboard
+│   │   │   ├── admin
+│   │   │   │   ├── layout.js
+│   │   │   │   └── page.js
+│   │   │   ├── client
+│   │   │   │   ├── layout.js
+│   │   │   │   └── page.js
+│   │   │   ├── developer
+│   │   │   │   ├── layout.js
+│   │   │   │   └── page.js
+│   │   │   └── page.jsx
 │   │   ├── favicon.ico
 │   │   ├── globals.css
 │   │   ├── layout.js
 │   │   └── page.js
 │   ├── components
+│   │   ├── app-sidebar.jsx
 │   │   ├── landiingPageUI
 │   │   │   ├── Footer
 │   │   │   │   ├── FeatureSections.jsx
@@ -88,16 +103,24 @@
 │   │   │   ├── TerminalBox.jsx
 │   │   │   └── WobbleCard.jsx
 │   │   ├── login-form.jsx
+│   │   ├── nav-main.jsx
+│   │   ├── nav-projects.jsx
+│   │   ├── nav-user.jsx
 │   │   ├── register-form.jsx
+│   │   ├── team-switcher.jsx
 │   │   └── ui
 │   │       ├── alert-dialog.jsx
 │   │       ├── animated-gradient-text.jsx
 │   │       ├── aurora-text.jsx
+│   │       ├── avatar.jsx
+│   │       ├── breadcrumb.jsx
 │   │       ├── button.jsx
 │   │       ├── canvas-reveal-effect.jsx
 │   │       ├── card.jsx
 │   │       ├── card-spotlight.jsx
+│   │       ├── collapsible.jsx
 │   │       ├── container-scroll-animation.jsx
+│   │       ├── dropdown-menu.jsx
 │   │       ├── GridBackGround.jsx
 │   │       ├── hover-border-gradient.jsx
 │   │       ├── hyper-text.jsx
@@ -106,12 +129,19 @@
 │   │       ├── label.jsx
 │   │       ├── navigation-menu.jsx
 │   │       ├── rainbow-button.jsx
+│   │       ├── separator.jsx
+│   │       ├── sheet.jsx
+│   │       ├── sidebar.jsx
+│   │       ├── skeleton.jsx
 │   │       ├── sparkles-text.jsx
 │   │       ├── terminal.jsx
+│   │       ├── tooltip.jsx
 │   │       └── wobble-card.jsx
 │   ├── config
 │   │   ├── constants.js
 │   │   └── env.js
+│   ├── hooks
+│   │   └── use-mobile.jsx
 │   ├── Http
 │   │   └── Middleware
 │   │       └── clerk-middleware.ts
@@ -143,4 +173,4 @@
 ├── tailwind.config.js
 └── tailwind.config.mjs
 
-40 directories, 104 files
+47 directories, 127 files

@@ -1,17 +1,19 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-// import { getUserIdFromSession } from "@/lib/SessionFetcher";
-import { getUserSession, getUserById } from "@/lib/auth";
+import { protectRoute } from "@/middleware/authMiddleware";
 
 export default async function ClientDashboardLayout({ children }) {
-    const userId = await getUserSession(); // Fetch userId from JWT cookies
+    const { redirect, user } = await protectRoute("client");
 
-    if (!userId) {
-        console.warn("No user ID found in session.");
-        return null; // Handle case where user is not authenticated
+    if (redirect) {
+        return <meta httpEquiv="refresh" content={`0; url=${redirect}`} />;
     }
 
-    const user = await getUserById(userId); // Fetch user details from DB
+    if (!user) {
+        console.warn("User not found in session.");
+        return null;
+    }
+
     return (
         <SidebarProvider>
             <AppSidebar user={user} />

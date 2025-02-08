@@ -1,13 +1,17 @@
-import { NextResponse } from "next/server";
-import { verifyToken } from "@/lib/jwt";
+import { getUserSession } from "@/lib/auth";
 
-export function authMiddleware(req) {
-  const token = req.cookies.get("authToken")?.value;
-  if (!token) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+export async function protectRoute(role) {
+    const user = getUserSession(); // Don't await, it's not async
 
-  const decoded = verifyToken(token, process.env.JWT_ACCESS_SECRET);
-  if (!decoded) return NextResponse.json({ message: "Invalid token" }, { status: 401 });
+    if (!user) {
+        console.warn("No user session found, redirecting...");
+        return { redirect: "/auth/sign-in", user: null };
+    }
 
-  req.user = decoded;
-  return NextResponse.next();
+    if (role && user.role !== role) {
+        console.warn(`User does not have ${role} role, redirecting...`);
+        return { redirect: "/unauthorized", user: null };
+    }
+
+    return { redirect: null, user };
 }
