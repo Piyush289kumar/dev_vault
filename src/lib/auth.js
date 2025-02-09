@@ -17,8 +17,9 @@ export async function getUserById(userId) {
 
 export async function getUserSession() {
   try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("access_token")?.value; // Ensure it gets the token
+
+    const cookieStore = await cookies(); // ✅ Await cookies()
+    const token = cookieStore.get("access_token")?.value;
 
     if (!token) {
       console.warn("No access_token found in cookies.");

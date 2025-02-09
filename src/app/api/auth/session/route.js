@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { jwtDecode } from "jwt-decode"; // Import jwtDecode
 
 export async function GET() {
-  const cookieStore = cookies(); // ✅ No await needed
+  const cookieStore = await cookies(); // ✅ No await needed
   const token = cookieStore.get("access_token")?.value;
 
   if (!token) {

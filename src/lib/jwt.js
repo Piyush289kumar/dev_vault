@@ -13,7 +13,7 @@ export function generateTokens(user) {
   const accessToken = jwt.sign(
     { id: user._id, role: user.role },
     process.env.JWT_ACCESS_SECRET,
-    { expiresIn: "15m" } // Short-lived token
+    { expiresIn: "1h" } // Short-lived token
   );
 
   const refreshToken = jwt.sign(
