@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LoaderCircle } from "lucide-react"; // ✅ Import LoaderCircle
 import { signIn } from "next-auth/react";
 import Link from "next/link";
