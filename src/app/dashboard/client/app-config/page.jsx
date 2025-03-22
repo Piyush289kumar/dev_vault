@@ -7,12 +7,12 @@ export default function ApplicationPage() {
   return (
     <div className="flex h-screen">
       {/* Sidebar (Left) */}
-      <div className={cn("w-1/4 border-r p-4 bg-gray-100")}>
+      <div className={cn("w-3/4  p-4")}>
         <Sidebar />
       </div>
 
       {/* AppView (Right) */}
-      <div className={cn("w-3/4 p-4")}>
+      <div className={cn("w-[30%] p-4")}>
         <AppView />
       </div>
     </div>
