@@ -13,6 +13,10 @@ export default function ApplicationPage() {
 
       {/* AppView (Right) */}
       <div className={cn("w-[30%] p-4")}>
+        {/* Red Header Section */}
+        <div className="bg-zinc-400 rounded-t-lg text-center w-full py-4">
+          <h2 className="text-lg text-white font-semibold">App Preview</h2>
+        </div>
         <AppView />
       </div>
     </div>
