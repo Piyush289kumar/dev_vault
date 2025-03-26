@@ -3,7 +3,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 
@@ -18,12 +24,6 @@ export default function ConfigView() {
           <div>
             <Label htmlFor="view-name">View Name</Label>
             <Input id="view-name" placeholder="Enter view name" />
-          </div>
-
-          {/* Unique Name */}
-          <div>
-            <Label htmlFor="unique-name">Unique Name</Label>
-            <Input id="unique-name" placeholder="Enter unique name" />
           </div>
 
           {/* Data Source */}
@@ -64,9 +64,12 @@ export default function ConfigView() {
                 <SelectValue placeholder="Select Position" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="top">Top</SelectItem>
-                <SelectItem value="bottom">Bottom</SelectItem>
-                <SelectItem value="side">Side</SelectItem>
+                <SelectItem value="First">First</SelectItem>
+                <SelectItem value="Last">Last</SelectItem>
+                <SelectItem value="Middle">Middle</SelectItem>
+                <SelectItem value="Next">Next</SelectItem>
+                <SelectItem value="Later">Later</SelectItem>
+                <SelectItem value="Manu">Manu</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -74,76 +77,59 @@ export default function ConfigView() {
           {/* Sort By */}
           <div>
             <Label htmlFor="sort-by">Sort By</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select Sort Column" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="name">Name</SelectItem>
-                <SelectItem value="date">Date</SelectItem>
-                <SelectItem value="status">Status</SelectItem>
-              </SelectContent>
-            </Select>
+            <div className="flex space-x-2">
+              {/* Sort Column Dropdown */}
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Sort Column" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="name">Name</SelectItem>
+                  <SelectItem value="date">Date</SelectItem>
+                  <SelectItem value="status">Status</SelectItem>
+                </SelectContent>
+              </Select>
+
+              {/* Sort Order Dropdown (Asc/Desc) - Default is Ascending */}
+              <Select defaultValue="asc">
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="asc">Ascending</SelectItem>
+                  <SelectItem value="desc">Descending</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           {/* Group By */}
           <div>
             <Label htmlFor="group-by">Group By</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select Group Column" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="category">Category</SelectItem>
-                <SelectItem value="status">Status</SelectItem>
-                <SelectItem value="location">Location</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+            <div className="flex space-x-2">
+              {/* Group Column Dropdown */}
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Group Column" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="category">Category</SelectItem>
+                  <SelectItem value="status">Status</SelectItem>
+                  <SelectItem value="location">Location</SelectItem>
+                </SelectContent>
+              </Select>
 
-          {/* Group Aggregate */}
-          <div>
-            <Label htmlFor="group-aggregate">Group Aggregate</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select Aggregation Type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="sum">Sum</SelectItem>
-                <SelectItem value="count">Count</SelectItem>
-                <SelectItem value="average">Average</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Main Image */}
-          <div>
-            <Label htmlFor="main-image">Main Image Column</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select Image Column" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="profile_picture">Profile Picture</SelectItem>
-                <SelectItem value="thumbnail">Thumbnail</SelectItem>
-                <SelectItem value="banner">Banner</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Image Shape */}
-          <div>
-            <Label htmlFor="image-shape">Image Shape</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select Image Shape" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="square">Square</SelectItem>
-                <SelectItem value="circle">Circle</SelectItem>
-                <SelectItem value="rounded">Rounded</SelectItem>
-              </SelectContent>
-            </Select>
+              {/* Group Order Dropdown (Asc/Desc) - Default is Ascending */}
+              <Select defaultValue="asc">
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="asc">Ascending</SelectItem>
+                  <SelectItem value="desc">Descending</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           {/* Primary Header */}
@@ -190,20 +176,30 @@ export default function ConfigView() {
               </SelectContent>
             </Select>
           </div>
-
-          {/* Nested Table */}
+          {/* Actions */}
           <div>
-            <Label htmlFor="nested-table">Nested Table Column</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select Nested Table Column" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="order_details">Order Details</SelectItem>
-                <SelectItem value="user_history">User History</SelectItem>
-                <SelectItem value="invoice_data">Invoice Data</SelectItem>
-              </SelectContent>
-            </Select>
+            <Label htmlFor="actions">Actions</Label>
+            <div className="grid grid-cols-2 gap-4 p-2">
+              {/* Left Column */}
+              <div className="flex items-center space-x-2">
+                <Checkbox id="edit" />
+                <Label htmlFor="edit">Edit</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="delete" />
+                <Label htmlFor="delete">Delete</Label>
+              </div>
+
+              {/* Right Column */}
+              <div className="flex items-center space-x-2">
+                <Checkbox id="view" />
+                <Label htmlFor="view">View</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="duplicate" />
+                <Label htmlFor="duplicate">Duplicate</Label>
+              </div>
+            </div>
           </div>
 
           {/* Description */}
